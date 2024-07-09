@@ -1,10 +1,11 @@
 [project]
-name = "project-name"
+name = "ml4shiptelemetry"
 version = "0.0.1"
 authors = [
-  { name="FirstName LastName", email="firstname.lastname@dlr.de" },
+  { name="Antony Zappacosta", email="antony.zappacosta@dlr.de" },
+  { name="Vytautas Jancauskas", email="vytautas.jancauskas@dlr.de" },
 ]
-description = "Project description"
+description = "Ship data processing with Machine Learning"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
@@ -19,5 +20,5 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/DLR-MF-DAS/project-name"
-Issues = "https://github.com/DLR-MF-DAS/project-name/issues"
+Homepage = "https://github.com/DLR-MF-DAS/ml4shiptelemetry"
+Issues = "https://github.com/DLR-MF-DAS/ml4shiptelemetry/issues"

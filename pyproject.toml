@@ -18,7 +18,8 @@ dependencies = [
     "click",
     "pdoc",
     "numpy",
-    "pandas"
+    "pandas",
+    "matplotlib"
 ]
 
 [project.urls]

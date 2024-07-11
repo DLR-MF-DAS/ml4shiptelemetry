@@ -19,7 +19,8 @@ dependencies = [
     "pdoc",
     "numpy",
     "pandas",
-    "matplotlib"
+    "matplotlib",
+    "scikit-learn"
 ]
 
 [project.urls]

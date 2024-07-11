@@ -1,6 +1,6 @@
 import click
-from RFRegressorModel import RFRegressor
-from dataloader import process_files
+from .RFRegressorModel import RFRegressor
+from .dataloader import process_files
 
 @click.command()
 @click.option('--data-dir', help='Data directory contaning .tab files and folders with .dat files', required=False)

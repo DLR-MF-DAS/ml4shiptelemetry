@@ -10,6 +10,10 @@ The goal of this project is to build a Machine Learning (ML) model capable of in
 
 We approached this task as a supervised learning problem, with thermosalinograph measurements as input data and temperature and salinity as output targets. Using temperature and salinity ground truth data provided by GEOMAR, we trained a Random Forest (RF) regressor. We performed 5-fold cross-validation to evaluate the model, measuring its accuracy with the R² score, which indicates the percentage of variance in the dependent variable explained by the model. Our RF regressor achieved an R² score of 0.99, and visual analysis of the predictions confirms that the model's output closely aligns with the reference data.
 
+| Temp Reference         | Temp Prediction         | Sal Reference         | Sal Prediction         |
+|------------------------|-------------------------|-----------------------|------------------------|
+| ![Temp Reference](imgs/temp_ref.jpg) | ![Temp Prediction](imgs/temp_pred.jpg) | ![Sal Reference](imgs/sal_ref.jpg) | ![Sal Prediction](imgs/sal_pred.jpg) |
+
 ## Run Our Work
 
 Our project is packaged as a Python module, which can be easily installed with:

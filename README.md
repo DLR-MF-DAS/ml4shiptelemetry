@@ -30,6 +30,12 @@ python -m ml4shiptelemetry --data-dir your/path/to/data
 
 Replace `your/path/to/data` with the directory containing your thermosalinograph and ground truth data.
 
+For datasets with time series nature, i.e. the samples are ordered and subsequent samples are correlated, a time series cross validation can be used instead. Activate the time series cross validation by using the `--ts_cv` flag:
+
+```bash
+python -m ml4shiptelemetry --data-dir your/path/to/data --ts_cv
+```
+
 ## Future work
 
 We want to extend what we did until now by:

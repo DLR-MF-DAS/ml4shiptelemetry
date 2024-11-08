@@ -25,7 +25,7 @@ pip install ml4shiptelemetry
 Once installed, you can begin cross-validating the RF regressor with:
 
 ```bash
-python -m ml4shiptelemetry --data-dir your/path/to/data
+python -m ml4shiptelemetry --data-dir your/path/to/data --cv
 ```
 
 Replace `your/path/to/data` with the directory containing your thermosalinograph and ground truth data.
@@ -33,7 +33,20 @@ Replace `your/path/to/data` with the directory containing your thermosalinograph
 For datasets with time series nature, i.e. the samples are ordered and subsequent samples are correlated, a time series cross validation can be used instead. Activate the time series cross validation by using the `--ts_cv` flag:
 
 ```bash
-python -m ml4shiptelemetry --data-dir your/path/to/data --ts_cv
+python -m ml4shiptelemetry --data-dir your/path/to/data --cv --ts_cv
+```
+
+The following flags can be appended to the function call
+
+```bash
+--data-dir [string]             Path to raw data. Required.
+--cv                            Crossvalidate model performance on training data. Leave out to not crossvalidate.
+--ts_cv                         Use time series cross validation instead of regular cross validation.
+--n_test_files [integer]        Number of data files to use as test set. Test files are picked from the back of the list of files.
+--n_neighbours [integer]        Number of neighbouring rows to add to each row in the training set. For example, a value 1 means adding the row before and after.
+--classification_model [string] Model to use for classification. Currently implemented: rf, balanced_rf.
+--store_reuse                   Store or load training and test data to file in the directory from which the python script is executed.
+--model_output_path [string]    Path to where models shall be stored pickle files at specified location. Leave out to not store models.
 ```
 
 ## Future work

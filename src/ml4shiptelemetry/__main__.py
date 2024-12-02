@@ -4,8 +4,8 @@ import os
 import sys
 import numpy as np
 import joblib
-from .RFRegressorModel import RFRegressor, RFClassifier
-from .dataloader import process_files
+from ml4shiptelemetry.RFRegressorModel import RFRegressor, RFClassifier
+from ml4shiptelemetry.dataloader import process_files
 import logging
 import datetime
 import json

@@ -121,22 +121,22 @@ def main(data_dir, cv, ts_cv, cv_params, n_test_files, n_neighbours,
                 cvp = json.load(json_data)
         else:
             cvp = DEFAULT_CV_PARAMS
-        print(cvp)
+            
         # Performs both crossvalidation and refits on the full training set.
         message = 'Regression cross validation'
         logging.info(message)
-        # print(message)
+
         rfregressor.crossvalidate(x, y_reg, num_splits=5, time_series=ts_cv, 
                                   cv_params=cvp['regression'],
                                   shuffle=False, verbose=verbose, n_jobs=1)
 
         message = '\nClassification cross validation'
         logging.info(message)
-        # print(message)
+        
         for t, clf in rfclassifiers.items():
             message = f"Target: {t}"
             logging.info(message)
-            # print(message)
+            
             clf['classifier'].crossvalidate(x, y_class[:, clf['index']], num_splits=5, time_series=ts_cv, 
                                             cv_params=cvp['classification'],
                                             shuffle=False, verbose=verbose, n_jobs=1)
@@ -152,7 +152,7 @@ def main(data_dir, cv, ts_cv, cv_params, n_test_files, n_neighbours,
         # Evaluate and print performance
         message = '\nTest performance'
         logging.info(message)
-        # print(message)
+        
         scores_reg = rfregressor.calculate_all_scores(x_test, y_test_reg)
         rfregressor.print_performance('\nRegression test performance', scores_reg)
 

@@ -219,6 +219,8 @@ def process_files(data_path, n_test_files=0, n_neighbours=0):
         dat_files += (preprocessed_df_dat.to_numpy(),)
         tab_files_reg += (preprocessed_df_tab_reg.to_numpy(),)
         tab_files_class += (preprocessed_df_tab_class.to_numpy(),)
+    
+    feature_names = preprocess_dat_file.columns.to_lilst()
 
     # Create training dataset
     x_train = np.concatenate(dat_files[0:n_train_files], axis = 0)
@@ -254,7 +256,8 @@ def process_files(data_path, n_test_files=0, n_neighbours=0):
             'y_test_reg': y_test_reg, 
             'y_test_class': y_test_class, 
             'targets_reg': TARGETS_REG, 
-            'targets_class': TARGETS_CLASS}
+            'targets_class': TARGETS_CLASS,
+            'feature_names': feature_names}
 
 
 # Uncomment and update the code below in case different data files needs different processing.

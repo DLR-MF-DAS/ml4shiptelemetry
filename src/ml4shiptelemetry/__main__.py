@@ -96,6 +96,7 @@ def main(data_dir, cv, ts_cv, cv_params, n_test_files, n_neighbours,
     y_test_class = data['y_test_class']
     targets_reg = data['targets_reg']
     targets_class = data['targets_class']
+    feature_names = data['feature_names']
 
     # Create regressor
     rfregressor = RFRegressor(target_names=targets_reg, 

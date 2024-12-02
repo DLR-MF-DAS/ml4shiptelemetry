@@ -59,7 +59,7 @@ def setup_logging(log_dir=DEFAULT_LOG_DIR):
 @click.option('--preprocessed-dir', default=DEFAULT_PROC_DATA_DIR, type=str, required=False, help='Directory to store processed data for faster reprocessing next time.')
 @click.option('--model-output-dir', default=DEFAULT_MODEL_DIR, type=str, required=False, help='Directory to store models as pickle files.')
 @click.option('--log-dir', default=DEFAULT_LOG_DIR, type=str, required=False, help="Directory to save log file.")
-@click.option('--verbose', default=1, type=int, required=False, help='Verbosity of scikit-learn RandomSearchCV.')
+@click.option('--verbose', default=1, type=int, required=False, help='Verbosity of scikit-learn GridSearchCV.')
 def main(data_dir, cv, ts_cv, cv_params, n_test_files, n_neighbours, 
          preprocessed_dir, model_output_dir, log_dir, verbose):
     

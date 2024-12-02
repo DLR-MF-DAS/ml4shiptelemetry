@@ -1,9 +1,10 @@
 [project]
 name = "ml4shiptelemetry"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Antony Zappacosta", email="antony.zappacosta@dlr.de" },
   { name="Vytautas Jancauskas", email="vytautas.jancauskas@dlr.de" },
+  { name="Rikard Vinge", email="rikard.vinge@dlr.de" },
 ]
 description = "Ship data processing with Machine Learning"
 readme = "README.md"

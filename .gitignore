@@ -1,6 +1,9 @@
 # Package specific ignores
 **/*.npz
 **/*.pkl
+**/logs/*
+**/data/*
+**/output/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

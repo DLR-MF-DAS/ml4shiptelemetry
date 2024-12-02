@@ -20,7 +20,9 @@ dependencies = [
     "numpy",
     "pandas",
     "matplotlib",
-    "scikit-learn"
+    "scikit-learn",
+    "imbalanced-learn",
+    "pyarrow"
 ]
 
 [project.urls]

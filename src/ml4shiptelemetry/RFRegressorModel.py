@@ -114,7 +114,7 @@ class RFRegressor:
         )
         param_search.fit(x, y)
         best_params = param_search.best_params_
-        params_str = ", ".join([f"{s} {best_params[s]}" for s in param_dist.keys()])
+        params_str = ", ".join([f"{s} {best_params[s]}" for s in cv_params.keys()])
         message = f"Best model parameters: {params_str}"
         message += '\n' +  f"R2 of best model from CV: {param_search.best_score_:.3f}."
         message += '\n' +  f"Time for GridSearchCV iterations: {time.time() - t_start:.1f}s"
@@ -238,7 +238,7 @@ class RFClassifier:
 
         param_search.fit(x, y)
         best_params = param_search.best_params_
-        params_str = ", ".join([f"{s}' {best_params[s]}" for s in param_dist.keys()])
+        params_str = ", ".join([f"{s}' {best_params[s]}" for s in cv_params.keys()])
         message = f"Best model parameters: {params_str}"
         message += '\n' +  f"Mean balanced accuracy of best model from CV: {100*param_search.best_score_:.1f}%."
         message += '\n' +  f"Time for GridSearchCV iterations: {time.time() - t_start:.1f}s"

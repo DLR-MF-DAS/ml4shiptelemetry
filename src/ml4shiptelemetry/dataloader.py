@@ -220,7 +220,7 @@ def process_files(data_path, n_test_files=0, n_neighbours=0):
         tab_files_reg += (preprocessed_df_tab_reg.to_numpy(),)
         tab_files_class += (preprocessed_df_tab_class.to_numpy(),)
     
-    feature_names = preprocess_dat_file.columns.to_lilst()
+    feature_names = preprocessed_df_dat.columns.to_lilst()
 
     # Create training dataset
     x_train = np.concatenate(dat_files[0:n_train_files], axis = 0)

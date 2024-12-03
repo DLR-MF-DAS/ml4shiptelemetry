@@ -1,0 +1,14 @@
+{
+    "regression": {
+        "n_estimators": [100, 200, 300, 400, 500],
+        "max_features": ["sqrt"],
+        "criterion": ["friedman_mse"],
+        "max_depth": [null]
+    },
+    "classification": {
+        "n_estimators": [100, 200, 300, 400, 500],
+        "max_features": ["sqrt"],
+        "criterion": ["gini", "entropy"],
+        "max_depth": [null]
+    }
+}

@@ -22,7 +22,7 @@ dependencies = [
     "pandas",
     "matplotlib",
     "scikit-learn",
-    "imblearn",
+    "imbalanced-learn",
     "pyarrow"
 ]
 

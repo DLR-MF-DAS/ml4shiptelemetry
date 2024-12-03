@@ -1,9 +1,12 @@
 import pandas as pd
 import numpy as np
+import logging
 
 TIME_COLS = ['year', 'month', 'day', 'hour', 'minute']
 TARGETS_REG = ['Temp [°C]', 'Cond [S/m]', 'Temp_int [°C]', 'Sal']
 TARGETS_CLASS = ['Temp_Flag', 'Sal_Flag']
+FLAG_GROUP = {'good': [1, 2], 'bad': [3, 4], 'ignore': [0, 5, 6, 7, 8, 9]}
+FLAG_GROUP_LABEL = {'good': 1, 'bad': 0, 'ignore': -1}
 
 
 def preprocess_dat_file(dat_file_path, n_neighbours=0):
@@ -107,6 +110,19 @@ def preprocess_tab_file(tab_file_path):
     df_tab_grouped = df_tab.groupby(TIME_COLS)[TARGETS_REG].mean()
     df_tab_grouped[TARGETS_CLASS] = df_tab.groupby(TIME_COLS)[TARGETS_CLASS].agg(pd.Series.mode)
 
+    # Group flags
+    for t in TARGETS_CLASS:
+        df_tab_grouped.loc[df_tab_grouped[t].isin(FLAG_GROUP['good']), t+'_group'] = FLAG_GROUP_LABEL['good']
+        df_tab_grouped.loc[df_tab_grouped[t].isin(FLAG_GROUP['bad']), t+'_group'] = FLAG_GROUP_LABEL['bad']
+        df_tab_grouped.loc[df_tab_grouped[t].isin(FLAG_GROUP['ignore']), t+'_group'] = FLAG_GROUP_LABEL['ignore']
+        # Remove ignored flags
+        df_tab_grouped = df_tab_grouped[df_tab_grouped[t+'_group'].isin([FLAG_GROUP_LABEL['good'], FLAG_GROUP_LABEL['bad']])]
+        # Overwrite original target column
+        df_tab_grouped[t] = df_tab_grouped[t+'_group']
+        # Delete new target column
+        df_tab_grouped = df_tab_grouped.drop(columns=[t+'_group'])
+        df_tab_grouped[t] = df_tab_grouped[t].astype(int)
+    
     # If there still are missing (NaN) values, drop these
     df_tab_grouped = df_tab_grouped.dropna()
     return df_tab_grouped
@@ -159,7 +175,8 @@ def process_files(data_path):
 
 
 def process_files(data_path, n_test_files=0, n_neighbours=0):
-    "Same functionality as process_files but written in a loop"
+    "Load data and targets and put in training or test datasets."
+    logger = logging.getLogger()
 
     # Files to load.
     # Add new files by adding tuples (dat-file, tab-file).
@@ -188,7 +205,7 @@ def process_files(data_path, n_test_files=0, n_neighbours=0):
             train_test_set = 'training'
         else:
             train_test_set = 'test'
-        print(f"Processing dat file {data_file[0].split('/')[-1]} and tab file {data_file[1].split('/')[-1]}. Added to {train_test_set} set.")
+        logger.info(f"Processing dat file {data_file[0].split('/')[-1]} and tab file {data_file[1].split('/')[-1]}. Added to {train_test_set} set.")
         dat_file = data_path + data_file[0]
         tab_file = data_path + data_file[1]
         
@@ -202,6 +219,8 @@ def process_files(data_path, n_test_files=0, n_neighbours=0):
         dat_files += (preprocessed_df_dat.to_numpy(),)
         tab_files_reg += (preprocessed_df_tab_reg.to_numpy(),)
         tab_files_class += (preprocessed_df_tab_class.to_numpy(),)
+    
+    feature_names = preprocessed_df_dat.columns.to_list()
 
     # Create training dataset
     x_train = np.concatenate(dat_files[0:n_train_files], axis = 0)
@@ -230,7 +249,15 @@ def process_files(data_path, n_test_files=0, n_neighbours=0):
         y_test_reg = None
         y_test_class = None
 
-    return x_train, y_train_reg, y_train_class, x_test, y_test_reg, y_test_class, TARGETS_REG, TARGETS_CLASS
+    return {'x': x_train, 
+            'y_reg': y_train_reg, 
+            'y_class': y_train_class, 
+            'x_test': x_test, 
+            'y_test_reg': y_test_reg, 
+            'y_test_class': y_test_class, 
+            'targets_reg': TARGETS_REG, 
+            'targets_class': TARGETS_CLASS,
+            'feature_names': feature_names}
 
 
 # Uncomment and update the code below in case different data files needs different processing.

@@ -36,17 +36,19 @@ For datasets with time series nature, i.e. the samples are ordered and subsequen
 python -m ml4shiptelemetry --data-dir your/path/to/data --cv --ts_cv
 ```
 
-The following flags can be appended to the function call
+The following flags can be used in the command line call:
 
 ```bash
 --data-dir [string]             Path to raw data. Required.
---cv                            Crossvalidate model performance on training data. Leave out to not crossvalidate.
---ts_cv                         Use time series cross validation instead of regular cross validation.
---n_test_files [integer]        Number of data files to use as test set. Test files are picked from the back of the list of files.
---n_neighbours [integer]        Number of neighbouring rows to add to each row in the training set. For example, a value 1 means adding the row before and after.
---classification_model [string] Model to use for classification. Currently implemented: rf, balanced_rf.
---store_reuse                   Store or load training and test data to file in the directory from which the python script is executed.
---model_output_path [string]    Path to where models shall be stored pickle files at specified location. Leave out to not store models.
+--cv                            Crossvalidate model performance on training data. Leave out to not crossvalidate. Applies K-fold without shuffling (unless overridden by ts-cv).
+--ts-cv                         Use time series cross validation instead of regular cross validation.
+--cv-params [string]            Path to json file containing cross-validation hyperparameters to exhaustively evaluate.
+--n-test-files [integer]        Number of data files to use as test set. Test files are picked from the back of the list of files.
+--n-neighbours [integer]        Number of neighbouring rows to add to each row in the training set. For example, a value 1 means adding the row before and after.
+--preprocessed-dir [string]     Directory to store processed data for faster reprocessing next time.
+--model-output-dir [string]     Directory to store models as pickle files.
+--log-dir [string]              Directory to save log file.
+--verbose [integer]             Verbosity of scikit-learn GridSearchCV.
 ```
 
 ## Future work

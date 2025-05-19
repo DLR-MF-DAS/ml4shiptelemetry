@@ -67,6 +67,10 @@ The following flags can be used in the command line call:
 | `--verbose` | integer | Verbosity of scikit-learn GridSearchCV. |
 
 
+## Explainable AI analysis
+
+An analysis of the features contributing to the prediction outcomes, utilizing SHAP, is included under `analysis/xai_analysis.ipynb`
+
 ## Future work
 
 We want to extend what we did until now by:
